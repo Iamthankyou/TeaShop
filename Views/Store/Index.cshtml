@@ -1,0 +1,66 @@
+﻿@using WecareMVC.Models;
+@model IEnumerable<WecareMVC.Models.Type>
+@{
+    ViewBag.Title = "TEAShop";
+}
+
+
+<div class="row">
+    <header>        <h1 class="text-danger text-center">Phân loại Top 5 bán chạy</h1>    </header>
+    
+        <article>
+            @foreach (var Type in Model)
+            {
+                <section class="row">
+                    <header class="col-md-12">
+                        <a href="/Store/@Type.Name">
+                            <h2>@Type.Name</h2>
+                        </a>
+                    </header>
+                    @foreach (var Tea in Type.GetTopTea(3))
+                    {
+                        <div class="col-sm-4 col-lg-4 col-md-4">
+                            <div class="thumbnail">
+                                @*style="max-height:400px !important">*@
+                                <img alt="@Tea.Title" src="@Tea.TeaArtUrl" />
+                                <div class="caption">
+                                    <h4 class="pull-right"><s>$ @(Tea.Price + 3)</s></h4>
+                                    <h4>
+                                        <a href="@Url.Action("Details", "Store", new { id = Tea.TeaId })">
+                                            @Tea.Title.Truncate(10)                                      
+
+                                        </a>
+                                    </h4>
+                                    @*<p>作者：@Truncate(Tea.Sup.Name, 25)</p>*@
+                                    <h3 class="text-danger">Giảm giá：$ @(Tea.Price)</h3>
+                                </div>
+                                <div class="ratings">
+                                    <p class="pull-right">Đã bán：@Tea.OrderDetails.Sum(o => o.Quantity) Cốc</p>
+                                    <p>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star"></span>
+                                        <span class="glyphicon glyphicon-star-empty"></span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                </section>
+            }
+        </article>
+
+</div>
+
+
+
+@*<p> Select from @Model.Count() 
+    Types:</p>
+<ul>
+    @foreach (var Type in Model)
+    {
+        <li>@Html.ActionLink(Type.Name,"browse", new{ Type = Type.Name})</li>
+    }
+</ul>*@

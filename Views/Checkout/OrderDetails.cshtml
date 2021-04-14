@@ -1,0 +1,70 @@
+﻿@model IEnumerable<WecareMVC.Models.OrderDetail>
+
+@{
+    ViewBag.Title = "Xác nhận đặt hàng!";
+}
+
+<h2 class="text-info">Chi tiết đặt hàng</h2>
+<h3 class="text-success">Cảm ơn bạn, mã đơn hàng của bạn là: @Model.FirstOrDefault().OrderId</h3>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Tea.Title)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Order.Username)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitPrice)
+        </th>
+        <th>
+            @*@Html.DisplayNameFor(model => model.UnitPrice)*@
+            Tiền
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tea.Title)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Order.Username)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+           $ @item.UnitPrice
+        </td>  
+        <td>
+            @((item.UnitPrice*item.Quantity).ToString("c2"))
+        </td> 
+              
+    </tr>
+}
+    <tr>
+        <td>Toàn bộ</td>
+        <td></td>
+        <td>Giá ban đầu</td>
+        <td style="text-decoration:line-through">@Model.Sum(o=>o.UnitPrice*o.Quantity).ToString("c2")</td>
+    </tr>
+
+    <tr>
+        <td></td>
+        <td></td>
+        <td class="text-danger h4">Giảm giá</td>
+        <td class="text-danger h4">@ViewBag.total.ToString("c2")</td>
+    </tr>
+
+</table>
+
+<p>
+    Mua thêm trà sữa：
+    @Html.ActionLink("Trang chủ", "Index", "Home")
+</p>

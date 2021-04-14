@@ -1,0 +1,26 @@
+﻿@model IEnumerable<WecareMVC.Models.Type>
+@*@model  IEnumerable<WecareMVC.ViewModels.TypeViewModel>*@
+
+<div id="categories" class="list-group">
+    @*<a href="#" class="list-group-item active" ></a>*@
+    @foreach (var Type in Model)
+    {
+        if (Type.Name == "Hot")
+        {
+            <a href="/Store/@Type.Name" class="list-group-item text-danger h3" style="margin-bottom:0!important; color:#e74c3c !important;">
+                <span class="badge" style="background:#e74c3c !important;">@Type.Teas.Count
+                </span>
+                @Type.Name
+            </a>
+        }
+        else
+        {
+            <a href="/Store/@Type.Name" class="text-info list-group-item h4 " style="margin-top:0 !important; margin-bottom:0!important; border-top:none !important ; font-family:'Microsoft JhengHei'; ">
+                <span class="badge">@Type.Teas.Count </span>
+                @Type.Name
+            </a>
+        }
+
+        @*@Html.ActionLink(Type.Name, "Browse", "Store", new { Type = Type.Name }, htmlAttributes: new { @class="list-group-item list-group-item-success" })*@
+    }
+</div>

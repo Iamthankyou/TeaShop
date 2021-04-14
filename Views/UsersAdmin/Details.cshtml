@@ -1,0 +1,39 @@
+﻿@model IdentitySample.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Thông tin người dùng";
+}
+
+<h2>Chi tiết</h2>
+
+<div>
+    <h4>Tên tài khoản</h4>
+    <hr />
+    <p> @Html.DisplayFor(model => model.UserName)</p> 
+</div>
+<br />
+<h4>Được phép</h4>
+@if (ViewBag.RoleNames.Count == 0)
+{
+    <hr />
+    <p>Không cho phép quyền quản trị</p>
+}
+
+<table class="table">
+
+    @foreach (var item in ViewBag.RoleNames)
+    {
+        <tr>
+            <td>
+                @item
+            </td>
+        </tr>
+    }
+</table>
+<p>
+    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Quay lại quản lý tài khoản", "Index")
+</p>
+
+
+

@@ -1,0 +1,63 @@
+﻿@model WecareMVC.Models.Tea
+
+@{
+    ViewBag.Title = "Thông tin sản phẩm";
+}
+
+<h3>Chi tiết về:  - @Model.Title</h3>
+
+<div>
+   
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sup.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sup.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Type.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type.Name)
+        </dd>
+
+        
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TeaArtUrl)
+        </dt>
+
+        <dd>           
+            @Html.DisplayFor(model => model.TeaArtUrl)
+           
+        </dd>
+
+        
+        <dd><img src="@Model.TeaArtUrl" class="img-responsive" alt="" /></dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.TeaId }) |
+    @Html.ActionLink("Quay lại sản phẩm", "Index")
+</p>

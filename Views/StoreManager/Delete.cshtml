@@ -1,0 +1,17 @@
+﻿@model WecareMVC.Models.Tea
+@{
+    ViewBag.Title = "Xóa sản phẩm";
+}
+<h2>Thông tin trà:</h2>
+<p>
+   Có chắc chắn xóa sản phẩm này ?？
+    <strong>@Model.Title</strong>?
+</p>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Đồng ý" />
+    </p>
+    <p>
+        @Html.ActionLink("Quay lại quản lý sản phẩm", "Index")
+    </p>
+}

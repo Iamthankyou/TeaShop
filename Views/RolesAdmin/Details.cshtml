@@ -1,0 +1,41 @@
+﻿@model Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+
+@{
+    ViewBag.Title = "Chi tiết";
+}
+
+<h2>Chi tiết</h2>
+
+<div>
+    <h4>Phạm vi quyền</h4>
+    <hr />Tên：
+  
+            @Html.DisplayFor(model => model.Name)
+    
+</div>
+<br />
+<h4>Người dùng được cho phép</h4>
+@if (ViewBag.UserCount == 0)
+{
+    <hr />
+    <p>Không sử dụng</p>
+}
+
+<table class="table">
+
+    @foreach (var item in ViewBag.Users)
+    {
+        <tr>
+            <td>
+                @item.UserName
+            </td>
+        </tr>
+    }
+</table>
+<p>
+    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Quay lại quản lý quyền", "Index")
+</p>
+
+
+

@@ -1,0 +1,33 @@
+﻿@model IdentitySample.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Xóa bỏ";
+}
+
+<h2>Xóa người dùng</h2>
+
+<h3>Xác nhận xóa</h3>
+<div>
+    <h4>Người dùng</h4>
+    <hr />
+    @*<dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+    </dl>*@
+    <p>@Html.DisplayFor(model => model.UserName)</p>
+    <br />
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Xóa" class="btn btn-default" /> |
+            @Html.ActionLink("Quay lại quản lý tài khoản", "Index")
+        </div>
+    }
+</div>
