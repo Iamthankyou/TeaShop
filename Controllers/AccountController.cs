@@ -340,12 +340,14 @@ namespace IdentitySample.Controllers
         //
         // GET: /Account/ExternalLoginCallback
         [AllowAnonymous]
-        public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
+        public async Task<ActionResult> ExternalLoginCallback(string returnUrl) 
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
+            
             if (loginInfo == null)
             {
-                return RedirectToAction("Login");
+                //return RedirectToAction("Login");
+                return View("ExternalLoginFailure");
             }
 
             
@@ -374,6 +376,7 @@ namespace IdentitySample.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
         {
+
             if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Manage");
@@ -383,10 +386,12 @@ namespace IdentitySample.Controllers
             {
                 // Nhận thông tin từ đăng nhập ngoài
                 var info = await AuthenticationManager.GetExternalLoginInfoAsync();
+
                 if (info == null)
                 {
                     return View("ExternalLoginFailure");
                 }
+            
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)

@@ -3,7 +3,7 @@
     ViewBag.Title = "Đăng ký";
 }
 <h2>@ViewBag.Title</h2>
-<h3>Đăng ký @ViewBag.LoginProvider Đăng ký</h3>
+<h3>Đăng ký @ViewBag.LoginProvider </h3>
 
 @using (Html.BeginForm("ExternalLoginConfirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
@@ -14,9 +14,9 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
         <p class="text-info col-md-10">
-            Đã  <strong>@ViewBag.LoginProvider</strong> xác nhận！
+            Đã được  <strong>@ViewBag.LoginProvider</strong> xác nhận！
 
-            Vui lòng nhập email đã sử dụng.
+            Vui lòng nhập email sử dụng.
         </p>
         </div>   
         <div class="form-group">
