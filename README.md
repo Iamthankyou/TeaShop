@@ -1,2 +1,2 @@
 # TeaShop
-Web TeaShop with ASP 
+Web TeaShop with ASP MVC
