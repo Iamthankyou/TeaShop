@@ -36,14 +36,14 @@ namespace IdentitySample
             app.UseTwoFactorRememberBrowserCookie(DefaultAuthenticationTypes.TwoFactorRememberBrowserCookie);
 
             app.UseFacebookAuthentication(
-            appId: "292696360926184",
-            appSecret: "42689850073ee1ef6af3ad0029cbec13");
+            appId: "191948986072615",
+            appSecret: "7926c18b2a10eec1903aef81fa9f3c87");
 
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = "183168110639-fk7jh3ra2hm2sivjkafavn7t96iudlla.apps.googleusercontent.com",
-                ClientSecret = "u_t8ctNMuctbCn4_3rAGD8aD"
+                ClientId = "304713763204-q40k3anqh2k754mtk7e31ab9eteklonr.apps.googleusercontent.com",
+                ClientSecret = "xUPNUdBSgCjBvjgUbOjt5KX0"
             });
         }
     }
