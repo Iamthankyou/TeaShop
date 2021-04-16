@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using WecareMVC.Models;
+using TeaMVC.Models;
 
-namespace WecareMVC.ViewModels
+namespace TeaMVC.ViewModels
 {
     public class ShoppingCartViewModel
     {

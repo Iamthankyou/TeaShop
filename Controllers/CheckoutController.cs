@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using WecareMVC.Models;
+using TeaMVC.Models;
 
-namespace WecareMVC.Controllers
+namespace TeaMVC.Controllers
 {
     [Authorize]
     public class CheckoutController : Controller

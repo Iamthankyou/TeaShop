@@ -1,4 +1,4 @@
-﻿namespace WecareMVC.Models
+﻿namespace TeaMVC.Models
 {
     using System;
     using System.Data.Entity;

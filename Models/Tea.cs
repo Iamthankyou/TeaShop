@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace WecareMVC.Models
+namespace TeaMVC.Models
 {
     [Bind(Exclude = "TeaId")]
     public class Tea
