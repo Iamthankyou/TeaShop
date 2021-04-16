@@ -10,6 +10,8 @@
         public TeaEntities()
             : base("name=TeaEntities")
         {
+          /*  this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.ProxyCreationEnabled = false;*/
         }
 
         
