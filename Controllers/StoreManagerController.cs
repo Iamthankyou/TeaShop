@@ -171,7 +171,7 @@ namespace TeaMVC.Controllers
 
             ViewBag.SupId = new SelectList(db.Sups, "SupId", "Name", Tea.SupId);
             ViewBag.TypeId = new SelectList(db.Types, "TypeId", "Name", Tea.TypeId);
-            ViewBag.uploadInfo = "請選擇Đường dẫn hình ảnh: ！";
+            ViewBag.uploadInfo = "Đường dẫn hình ảnh: ！";
             return View(Tea);
         }
 
