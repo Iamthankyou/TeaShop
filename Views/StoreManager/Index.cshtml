@@ -13,15 +13,17 @@
         $('#teas .js-delete').click(function () {
             var button = $(this);
 
-            if (confirm("Bạn có chăc chắn muốn xóa sản phẩm này ? ")) {
-                $.ajax({
-                    url: "/api/Teas/" + $(this).attr("data-tea-id"),
-                    method: "DELETE",
-                    success: function () {
-                        button.parents("tr").remove();
-                    }
-                });
-            }
+            bootbox.confirm("Xóa sản phẩm này ?", function (res) {
+                if (res) {
+                    $.ajax({
+                        url: "/api/Teas/" + button.attr("data-tea-id"),
+                        method: "DELETE",
+                        success: function () {
+                            button.parents("tr").remove();
+                        }
+                    });
+                }
+            })
 
         });
     });
