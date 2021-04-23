@@ -10,6 +10,7 @@ namespace IdentitySample.Controllers
         //
         // GET: /Home/
         TeaEntities storeDB = new TeaEntities();
+        [AllowAnonymous]
         public ActionResult Index()
         {
             // Get most popular Teas

@@ -232,6 +232,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202104161607357_InitialCreate.cs" />
+    <Compile Include="Migrations\202104161607357_InitialCreate.Designer.cs">
+      <DependentUpon>202104161607357_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104230922122_AddPropertiesFullName.cs" />
+    <Compile Include="Migrations\202104230922122_AddPropertiesFullName.Designer.cs">
+      <DependentUpon>202104230922122_AddPropertiesFullName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdminViewModel.cs" />
     <Compile Include="Models\TeaAPI.cs" />
@@ -619,8 +628,15 @@
   <ItemGroup>
     <Folder Include="App_Data\Images\" />
     <Folder Include="Content\images\Upload\" />
-    <Folder Include="Migrations\" />
     <Folder Include="Properties\PublishProfiles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202104161607357_InitialCreate.resx">
+      <DependentUpon>202104161607357_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104230922122_AddPropertiesFullName.resx">
+      <DependentUpon>202104230922122_AddPropertiesFullName.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

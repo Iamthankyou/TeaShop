@@ -1,13 +1,17 @@
 ﻿@using Microsoft.AspNet.Identity
-@if (Request.IsAuthenticated) {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" })) {
+@using System.Security.Claims
+
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
         @Html.AntiForgeryToken()
-<ul class="nav navbar-nav navbar-right" style="margin-left:3px !important">
-        <li>
-            @Html.ActionLink("Xin chào " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Đăng xuất</a></li>
-</ul>
+        <ul class="nav navbar-nav navbar-right" style="margin-left:3px !important">
+            <li>
+                @Html.ActionLink("Xin chào " + (((ClaimsIdentity)User.Identity).FindFirst("FullName").Value) + " !", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Đăng xuất</a></li>
+        </ul>
     }
 }
 else
