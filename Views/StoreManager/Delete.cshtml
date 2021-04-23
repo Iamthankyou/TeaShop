@@ -1,13 +1,17 @@
-﻿@model WecareMVC.Models.Tea
+﻿@model TeaMVC.Models.Tea
 @{
     ViewBag.Title = "Xóa sản phẩm";
 }
 <h2>Thông tin trà:</h2>
 <p>
-   Có chắc chắn xóa sản phẩm này ?？
+    Có chắc chắn xóa sản phẩm này ?？
     <strong>@Model.Title</strong>?
 </p>
-@using (Html.BeginForm()) {
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
     <p>
         <input type="submit" value="Đồng ý" />
     </p>

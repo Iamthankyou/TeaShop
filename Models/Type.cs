@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace WecareMVC.Models
+namespace TeaMVC.Models
 {
     public class Type
     {
@@ -36,10 +36,10 @@ namespace WecareMVC.Models
         }
     }
 
-    //should add using WecareMVC.Models in Razor view
+    //should add using TeaMVC.Models in Razor view
     public static class TypeExtension
     {
-        public static IEnumerable<Tea> GetTopTea(this  WecareMVC.Models.Type Type, int count)
+        public static IEnumerable<Tea> GetTopTea(this  TeaMVC.Models.Type Type, int count)
         {
             TeaEntities db = new TeaEntities();
             var Teas = db.Teas.Where(a=>a.TypeId==Type.TypeId).

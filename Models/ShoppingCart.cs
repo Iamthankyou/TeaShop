@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace WecareMVC.Models
+namespace TeaMVC.Models
 {
     public partial class ShoppingCart
     {

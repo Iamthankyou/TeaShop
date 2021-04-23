@@ -1,4 +1,4 @@
-﻿namespace WecareMVC.Models
+﻿namespace TeaMVC.Models
 {
     using System;
     using System.Data.Entity;
@@ -10,6 +10,8 @@
         public TeaEntities()
             : base("name=TeaEntities")
         {
+          /*  this.Configuration.LazyLoadingEnabled = false;
+            this.Configuration.ProxyCreationEnabled = false;*/
         }
 
         
