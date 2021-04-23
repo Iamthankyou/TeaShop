@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
-using WecareMVC.Models;
+using TeaMVC.Models;
 using System.Linq;
 
 namespace IdentitySample.Controllers
@@ -17,7 +17,7 @@ namespace IdentitySample.Controllers
 
             if (HttpContext.Application["Theme"] == null)
                 HttpContext.Application["Theme"] = LoadTheme();
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
+            ViewBag.Message = "Sửa đổi theme.";
 
             return View(Teas);
         }

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Web;
 using System.Web.Mvc;
 
-namespace WecareMVC.Models
+namespace TeaMVC.Models
 {
     [Bind(Exclude = "TeaId")]
     public class Tea

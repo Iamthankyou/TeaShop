@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using WecareMVC.Models;
+using TeaMVC.Models;
 using Microsoft.WindowsAzure.Storage.Blob;
 using Microsoft.WindowsAzure.Storage;
 using System.IO;
 using System.Collections.Specialized;
 using System.Configuration;
 
-namespace WecareMVC.Controllers
+namespace TeaMVC.Controllers
 {
     [Authorize(Roles = "Admin")]
     public class StoreManagerController : Controller
@@ -171,7 +171,7 @@ namespace WecareMVC.Controllers
 
             ViewBag.SupId = new SelectList(db.Sups, "SupId", "Name", Tea.SupId);
             ViewBag.TypeId = new SelectList(db.Types, "TypeId", "Name", Tea.TypeId);
-            ViewBag.uploadInfo = "請選擇Đường dẫn hình ảnh: ！";
+            ViewBag.uploadInfo = "Đường dẫn hình ảnh: ！";
             return View(Tea);
         }
 

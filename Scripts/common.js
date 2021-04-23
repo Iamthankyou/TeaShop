@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
 
     $('#FileUpload1').change(function () {
-        $('#pUrl').text('預估url為:/Content/Images/Product/' + this.files[0].name);
+        $('#pUrl').text('Đường dẫn ảnh:/Content/Images/Product/' + this.files[0].name);
 
         var reader = new FileReader();
 

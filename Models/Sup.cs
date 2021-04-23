@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Web;
 
-namespace WecareMVC.Models
+namespace TeaMVC.Models
 {
     public class Sup
     {
