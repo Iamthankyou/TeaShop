@@ -5,13 +5,25 @@
     width: 396px;
     height: 30px;
     padding: 8px 12px;
-    font-size: 24px;
+    font-family: 'Microsoft JhengHei' !important;
     line-height: 30px;
     border: 2px solid #ccc;
     -webkit-border-radius: 8px;
     -moz-border-radius: 8px;
     border-radius: 8px;
     outline: none;
+}
+
+.twitter-typeahead {
+    width: 99%;
+}
+
+.tt-dropdown-menu {
+    width: 102%;
+}
+
+input.typeahead.tt-query { /* This is optional */
+    width: 300px !important;
 }
 
 .typeahead {

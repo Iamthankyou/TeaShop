@@ -4,6 +4,13 @@
 }
 
 <h1>@DateTime.Now.ToString()</h1>
+
+
+
+@Styles.Render("~/Content/css")
+
+
+
 <div id="promotion">
 
     <div class="row carousel-holder">
@@ -88,29 +95,6 @@
 
 
 
-@section scripts{
-    <script>
-        var teas = new Bloodhound({
-            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
-            queryTokenizer: Bloodhound.tokenizers.whitespace,
-            remote: {
-                url: '/api/Teas/query=%QUERY',
-                wildcard: '%QUERY'
-            }
-        });
-
-        $('#tea').typeahead({
-            minLength: 3,
-            highlight: true
-        }, {
-            name: 'best-pictures',
-            display: 'Title',
-            source: teas
-        });
-    </script>
-}
-
-
 @*<em>Fresh</em> off the grill!!*@
 
 @*<ul id="Tea-list">
@@ -126,3 +110,27 @@
         }
     </ul>*@
 
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            var teas = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/Teas/?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#teass').typeahead({
+                minLength: 3,
+                highlight: true
+            }, {
+                name: 'teass',
+                display: 'Title',
+                source: teas
+            });
+        });
+    </script>
+}

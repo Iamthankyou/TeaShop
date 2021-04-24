@@ -56,7 +56,19 @@
 
             <nav class="col-sm-12 col-md-3">
                 <header class="lead text-center tex"><h3 class="text-danger">Tìm kiếm</h3></header>    @*Tiêu đề*@
-                @Html.Partial("_Search")
+
+
+                <form action="" class="form-group">
+                    <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
+                        <div class="">
+                            <input id="teass" type="search" placeholder="Bạn muốn tìm kiếm gì ?" aria-describedby="button-addon1" class="form-control border-0 bg-light">
+                            <div class="input-group-append">
+                                <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
 
                 <header class="lead text-center tex"><h3 class="text-danger">Thể loại</h3></header>    @*Tiêu đề*@
                 @{Html.RenderAction("TypeMenu", "Store");}
