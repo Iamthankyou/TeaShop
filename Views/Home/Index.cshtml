@@ -130,6 +130,8 @@
                 name: 'teass',
                 display: 'Title',
                 source: teas
+            }).on("typeahead:select", function (e, tea) {
+                window.location.href = '/Store/Details/' + tea.TeaId;
             });
         });
     </script>
