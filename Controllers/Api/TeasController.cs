@@ -17,8 +17,13 @@ namespace TeaMVC.Controllers.Api
         private TeaEntities db = new TeaEntities();
 
         // GET: api/Teas
-        public IQueryable<Tea> GetTeas()
+        public IQueryable<Tea> GetTeas(string query = null)
         {
+            if (!String.IsNullOrWhiteSpace(query))
+            {
+                return db.Teas.Where(f => f.Title.Contains(query));
+            }
+
             return db.Teas;
         }
 
