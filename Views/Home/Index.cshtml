@@ -3,6 +3,7 @@
     ViewBag.Title = "Web bán trà sữa";
 }
 
+<h1>@DateTime.Now.ToString()</h1>
 <div id="promotion">
 
     <div class="row carousel-holder">
@@ -13,14 +14,15 @@
                     <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
                     <li data-target="#carousel-example-generic" data-slide-to="1"></li>
                     <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-             s   </ol>
+                    s
+                </ol>
                 <div class="carousel-inner">
                     <div class="item active">
                         <img class="slide-image" src="~/Content/images/Slider/slide1.jpg" alt="">
                     </div>
                     <div class="item">
                         <img class="slide-image" src="~/Content/images/Slider/slide2.jpg" alt="">
-                    </div>                  
+                    </div>
                     <div class="item">
                         <img class="slide-image" src="~/Content/images/Slider/slide3.jpg" alt="">
                     </div>
@@ -43,16 +45,16 @@
 <div class="row">
     <h3 class="text-danger col-xs-12">Top 5 Bán chạy</h3>
     @helper Truncate(string input, int length)
-{
-    if (input.Length <= length)
     {
-        @input
+        if (input.Length <= length)
+        {
+            @input
+        }
+        else
+        {
+            @input.Substring(0, length)<text>...</text>
+        }
     }
-    else
-    {
-        @input.Substring(0, length)<text>...</text>
-    }
-}
 
     @foreach (var Tea in Model)
     {
@@ -69,7 +71,7 @@
                     <h3 class="text-danger">Giảm giá：$ @(Tea.Price)</h3>
                 </div>
                 <div class="ratings">
-                    <p class="pull-right">Đã bán：@Tea.OrderDetails.Sum(o=>o.Quantity) Cốc</p>
+                    <p class="pull-right">Đã bán：@Tea.OrderDetails.Sum(o => o.Quantity) Cốc</p>
                     <p>
                         <span class="glyphicon glyphicon-star"></span>
                         <span class="glyphicon glyphicon-star"></span>
@@ -83,6 +85,31 @@
     }
 
 </div>
+
+
+
+@section scripts{
+    <script>
+        var teas = new Bloodhound({
+            datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+            queryTokenizer: Bloodhound.tokenizers.whitespace,
+            remote: {
+                url: '/api/Teas/query=%QUERY',
+                wildcard: '%QUERY'
+            }
+        });
+
+        $('#tea').typeahead({
+            minLength: 3,
+            highlight: true
+        }, {
+            name: 'best-pictures',
+            display: 'Title',
+            source: teas
+        });
+    </script>
+}
+
 
 @*<em>Fresh</em> off the grill!!*@
 

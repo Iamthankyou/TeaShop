@@ -26,13 +26,16 @@ namespace IdentitySample
             bundles.Add(new ScriptBundle("~/bundles/common").Include(
                       "~/Scripts/common.js",
                       "~/Scripts/DataTables/jquery.datatables.js",
-                      "~/Scripts/DataTables/datatables.bootstrap.js"
+                      "~/Scripts/DataTables/datatables.bootstrap.js",
+                      "~/Scripts/typeahead.bundle.js"
                       ));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",  //bootstrap.css
                       "~/Content/DataTables/css/datatables.bootstrap.css",  //bootstrap.css
-                      "~/Content/site.css"));
+                      "~/Content/site.css",
+                      "~/Content/typeahead.css"
+                      ));
         }
     }
 }
