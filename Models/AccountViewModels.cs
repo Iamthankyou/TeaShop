@@ -80,9 +80,9 @@ namespace IdentitySample.Models
 
     public class RegisterViewModel
     {
-        //[Required]
-        //[Display(Name = "Tên của bạn: ")]
-        //public string FirstName { get; set; }
+        [Required]
+        [Display(Name = "Tên của bạn: ")]
+        public string fullName { get; set; }
 
         [Required]
         [EmailAddress]
