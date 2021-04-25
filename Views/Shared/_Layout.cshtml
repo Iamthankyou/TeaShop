@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
 
-   
+
     @*@Styles.Render("~/Content/css")*@
     <link id="theme" href="../../Content/bootstrap_Default.css" rel="stylesheet" type="text/css" />
-    
+
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/common")
+
     <style type=text/css>
         body {
             font-family: 'Microsoft JhengHei' !important;
@@ -49,12 +51,33 @@
 
     <div class="container" style="margin-top:70px; ">
 
+
         <div class="row">
 
             <nav class="col-sm-12 col-md-3">
+                <header class="lead text-center tex"><h3 class="text-danger">Tìm kiếm</h3></header>    @*Tiêu đề*@
+
+
+                <form action="" class="form-group">
+                    <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
+                        <div class="">
+                            <input id="teass" type="search" placeholder="Bạn muốn tìm kiếm gì ?" aria-describedby="button-addon1" class="form-control border-0 bg-light">
+                            <div class="input-group-append">
+                                <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+
                 <header class="lead text-center tex"><h3 class="text-danger">Thể loại</h3></header>    @*Tiêu đề*@
                 @{Html.RenderAction("TypeMenu", "Store");}
+
+
+
             </nav>
+
+
 
             <section class="col-xs-12 col-sm-12 col-md-9">@RenderBody()</section>
 
@@ -66,12 +89,11 @@
         </footer>
     </div>
 
-
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/common")
     @RenderSection("scripts", required: false)
-   
-  
+
+
 </body>
 </html>

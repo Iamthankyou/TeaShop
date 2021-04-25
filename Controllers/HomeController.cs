@@ -10,6 +10,8 @@ namespace IdentitySample.Controllers
         //
         // GET: /Home/
         TeaEntities storeDB = new TeaEntities();
+        [AllowAnonymous]
+        //[OutputCache(Duration = 3600*12, Location = System.Web.UI.OutputCacheLocation.Server, VaryByParam ="*")]
         public ActionResult Index()
         {
             // Get most popular Teas

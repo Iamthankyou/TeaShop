@@ -2,25 +2,56 @@
 @{
     ViewBag.Title = "Sản phẩm - " + Model.Title;
 }
-<div class="col-md-offset-1">
-<h2 class="text-danger">Sản phẩm - @Model.Title</h2>
-<p>
-    <img alt="@Model.Title"
-         src="@Model.TeaArtUrl" class="img-responsive" />
-</p>
 
-@*<dl class="dl--horizontal">*@
-   
+@Styles.Render("~/Content/css")
+
+
+<div class="col-md-offset-1">
+    <h2 class="text-danger">Sản phẩm - @Model.Title</h2>
+    <p>
+        <img alt="@Model.Title"
+             src="@Model.TeaArtUrl" class="img-responsive" />
+    </p>
+
+    @*<dl class="dl--horizontal">*@
+
     <h4 class="text-primary">Loại trà：@Model.Type.Name</h4>
-    
+
     <h4 class="text-justify">Đơn vị cung cấp：@Model.Sup.Name</h4>
-   
+
     <h4 class="text-success">Giá tiền：@Model.Price.ToString("c2")</h4>
-   
+
     <span class="col-md-offset-4">
         @Html.ActionLink("Thêm vào giỏ", "AddToCart",
-        "ShoppingCart", new { id = Model.TeaId }, new { @class="h3 text-danger" })
-</span>
-@*</dl>*@
+        "ShoppingCart", new { id = Model.TeaId }, new { @class = "h3 text-danger" })
+    </span>
+    @*</dl>*@
 
 </div>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            var teas = new Bloodhound({
+                datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/api/Teas/?query=%QUERY',
+                    wildcard: '%QUERY'
+                }
+            });
+
+            $('#teass').typeahead({
+                minLength: 3,
+                highlight: true
+            }, {
+                name: 'teass',
+                display: 'Title',
+                source: teas
+            }).on("typeahead:select", function (e, tea) {
+                window.location.href = '/Store/Details/' + tea.TeaId;
+            });
+        });
+    </script>
+}
