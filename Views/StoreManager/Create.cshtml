@@ -27,10 +27,7 @@
 </style>
 <h2>Sản phẩm</h2>
 
-
-
-
-@using (Html.BeginForm("Create", "StoreManager", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Create", "StoreManager", FormMethod.Post, new { enctype = "multipart/form-data", id = "submitForm" }))
 {
     @Html.AntiForgeryToken()
 
@@ -98,7 +95,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="上架" class="btn btn-default" />
+                <input type="submit" value="Thêm mới" class="btn btn-default" />
             </div>
         </div>
     </div>
@@ -135,5 +132,17 @@
             display: 'Title',
             source: teas
         });
+
     });
+
 </script>
+
+@if (ViewBag.Success != null)
+{
+    <script>
+
+        $(document).ready(function () {
+            toastr.success("Đã thêm sản phẩm này");
+        });
+    </script>
+}

@@ -6,6 +6,8 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using TeaMVC.Models;
@@ -16,8 +18,8 @@ namespace TeaMVC.Controllers.Api
     {
         private TeaEntities db = new TeaEntities();
 
-        // GET: api/Teas
-        public IQueryable<Tea> GetTeas(string query = null)
+        // GET: api/Teass
+        public IQueryable<Tea> GetTeas(string query=null)
         {
             if (!String.IsNullOrWhiteSpace(query))
             {
@@ -27,12 +29,37 @@ namespace TeaMVC.Controllers.Api
             return db.Teas;
         }
 
-        // GET: api/Teas/5
-        [ResponseType(typeof(Tea))]
-        public IHttpActionResult GetTea(int id)
-        {
-            Tea tea = db.Teas.Find(id);
+            public async Task<HttpResponseMessage> PostFormData()
+            {
+                // Check if the request contains multipart/form-data.
+                if (!Request.Content.IsMimeMultipartContent())
+                {
+                    throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+                }
 
+                string root = HttpContext.Current.Server.MapPath("~/App_Data");
+                var provider = new MultipartFormDataStreamProvider(root);
+
+                try
+                {
+                    // Read the form data.
+                    await Request.Content.ReadAsMultipartAsync(provider);
+
+                    // This illustrates how to get the file names.
+                    
+                    return Request.CreateResponse(HttpStatusCode.OK);
+                }
+                catch (System.Exception e)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                }
+            }
+
+        // GET: api/Teass/5
+        [ResponseType(typeof(Tea))]
+        public async Task<IHttpActionResult> GetTea(int id)
+        {
+            Tea tea = await db.Teas.FindAsync(id);
             if (tea == null)
             {
                 return NotFound();
@@ -41,9 +68,9 @@ namespace TeaMVC.Controllers.Api
             return Ok(tea);
         }
 
-        // PUT: api/Teas/5
+        // PUT: api/Teass/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutTea(int id, Tea tea)
+        public async Task<IHttpActionResult> PutTea(int id, Tea tea)
         {
             if (!ModelState.IsValid)
             {
@@ -59,7 +86,7 @@ namespace TeaMVC.Controllers.Api
 
             try
             {
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -76,9 +103,9 @@ namespace TeaMVC.Controllers.Api
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Teas
+        // POST: api/Teass
         [ResponseType(typeof(Tea))]
-        public IHttpActionResult PostTea(Tea tea)
+        public async Task<IHttpActionResult> PostTea(Tea tea)
         {
             if (!ModelState.IsValid)
             {
@@ -86,23 +113,23 @@ namespace TeaMVC.Controllers.Api
             }
 
             db.Teas.Add(tea);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
             return CreatedAtRoute("DefaultApi", new { id = tea.TeaId }, tea);
         }
 
-        // DELETE: api/Teas/5
+        // DELETE: api/Teass/5
         [ResponseType(typeof(Tea))]
-        public IHttpActionResult DeleteTea(int id)
+        public async Task<IHttpActionResult> DeleteTea(int id)
         {
-            Tea tea = db.Teas.Find(id);
+            Tea tea = await db.Teas.FindAsync(id);
             if (tea == null)
             {
                 return NotFound();
             }
 
             db.Teas.Remove(tea);
-            db.SaveChanges();
+            await db.SaveChangesAsync();
 
             return Ok(tea);
         }

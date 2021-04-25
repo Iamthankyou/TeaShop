@@ -144,6 +144,8 @@ namespace TeaMVC.Controllers
         {
             ViewBag.SupId = new SelectList(db.Sups, "SupId", "Name");
             ViewBag.TypeId = new SelectList(db.Types, "TypeId", "Name");
+            ViewBag.Success = TempData["Success"] ;
+
             return View();
         }
 
@@ -163,7 +165,8 @@ namespace TeaMVC.Controllers
 
                     db.Teas.Add(Tea);
                     await db.SaveChangesAsync();
-                    return RedirectToAction("Details", new { id = Tea.TeaId });   
+                    TempData["Success"] = true;
+                return RedirectToAction("Details", new { id = Tea.TeaId });   
             }
 
             
