@@ -24,6 +24,11 @@ namespace TeaMVC.Controllers.Api
         {
             if (!String.IsNullOrWhiteSpace(query))
             {
+                if (query[0] == 'S')
+                {
+                    return db.Teas.Where(f => f.Sup.Name.Contains(query.Substring(1,3).ToString()));
+                }
+
                 return db.Teas.Where(f => f.Title.Contains(query));
             }
 

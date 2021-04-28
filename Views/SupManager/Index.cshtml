@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TeaMVC.Models.Tea>
+﻿@model IEnumerable<TeaMVC.Models.Sup>
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
@@ -19,7 +19,7 @@
             bootbox.confirm("Xóa sản phẩm này ?", function (res) {
                 if (res) {
                     $.ajax({
-                        url: "/api/Teas/" + button.attr("data-tea-id"),
+                        url: "/api/Sups/" + button.attr("data-tea-id"),
                         method: "DELETE",
                         success: function () {
                             button.parents("tr").remove();
@@ -71,30 +71,19 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Quản lý trà sữa</h2>
+<h2>Quản lý nhà cung cấp</h2>
 
 <p>
-    @Html.ActionLink("Thêm loại trà mới", "Create")
+    @Html.ActionLink("Thêm loại nhà cung cấp mới", "Create")
 </p>
-
-<p>
-    @Html.ActionLink("Thêm nhà cung cấp mới", "Index", "SupManager")
-</p>
-
 <table id="teas" class="table">
     <thead>
         <tr>
             <th>
-                Loại trà
+                Tên nhà cung cấp
             </th>
             <th>
-                Đơn vị cung cấp
-            </th>
-            <th>
-                Tên trà
-            </th>
-            <th>
-                Đơn giá
+                Mã nhà cung cấp
             </th>
             @*<th>
                     @Html.DisplayNameFor(model => model.TeaArtUrl)
@@ -107,31 +96,28 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Type.Name)
-                </td>
-                <td>
-                    @Truncate(item.Sup.Name, 25)
-                </td>
-                <td>
-                    @Truncate(item.Title, 25)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                @*<td>
-                        @Html.DisplayFor(modelItem => item.TeaArtUrl)
-                    </td>*@
-                <td>
-                    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.TeaId }) |
-                    @Html.ActionLink("Chi tiết", "Details", new { id = item.TeaId }) |
-                    @*
-                        @Html.ActionLink("Xóa ", "Delete", new { id=item.TeaId })
-                    *@
-                    <button data-tea-id="@item.TeaId" class="btn-link js-delete">Xóa</button>
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.SupId)
+            </td>
+
+
+            @*<td>
+            @Html.DisplayFor(modelItem => item.TeaArtUrl)
+        </td>*@
+            <td>
+                @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.SupId }) |
+                @Html.ActionLink("Chi tiết", "Details", new { id = item.SupId }) |
+                @*
+            @Html.ActionLink("Xóa ", "Delete", new { id=item.TeaId })
+                *@
+                <button data-tea-id="@item.SupId" class="btn-link js-delete">Xóa</button>
+            </td>
+        </tr>
         }
 
     </tbody>

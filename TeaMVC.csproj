@@ -218,12 +218,16 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\CartsController.cs" />
     <Compile Include="Controllers\Api\DetailController.cs" />
     <Compile Include="Controllers\Api\HomeController.cs" />
+    <Compile Include="Controllers\Api\OrderDetailsController.cs" />
+    <Compile Include="Controllers\Api\OrdersController.cs" />
     <Compile Include="Controllers\Api\StoreController.cs" />
     <Compile Include="Controllers\Api\SupsController.cs" />
     <Compile Include="Controllers\Api\TeasController.cs" />
     <Compile Include="Controllers\Api\TypeMenuController.cs" />
+    <Compile Include="Controllers\Api\TypesController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -231,6 +235,7 @@
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Controllers\StoreManagerController.cs" />
+    <Compile Include="Controllers\SupManagerController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -587,14 +592,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\StoreManager\Create.cshtml" />
-    <Content Include="Views\StoreManager\Delete.cshtml" />
-    <Content Include="Views\StoreManager\Details.cshtml" />
-    <Content Include="Views\StoreManager\Edit.cshtml" />
-    <Content Include="Views\StoreManager\Index.cshtml" />
-    <Content Include="Views\Store\Browse.cshtml" />
-    <Content Include="Views\Store\Details.cshtml" />
-    <Content Include="Views\Store\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\UsersAdmin\Index.cshtml" />
@@ -640,12 +637,25 @@
     <Content Include="Views\Checkout\AddressAndPayment.cshtml" />
     <Content Include="Views\Checkout\Complete.cshtml" />
     <Content Include="Views\ShoppingCart\_CartSummary.cshtml" />
-    <Content Include="Views\Store\_TypeMenu.cshtml" />
     <Content Include="Views\Shared\_ChangeTheme.cshtml" />
     <Content Include="Views\Checkout\View.cshtml" />
     <Content Include="Views\Checkout\OrderDetails.cshtml" />
-    <Content Include="Views\Store\Search.cshtml" />
     <Content Include="Views\Shared\_Search.cshtml" />
+    <Content Include="Views\StoreManager\Create.cshtml" />
+    <Content Include="Views\StoreManager\Delete.cshtml" />
+    <Content Include="Views\StoreManager\Details.cshtml" />
+    <Content Include="Views\StoreManager\Edit.cshtml" />
+    <Content Include="Views\StoreManager\Index.cshtml" />
+    <Content Include="Views\Store\Browse.cshtml" />
+    <Content Include="Views\Store\Details.cshtml" />
+    <Content Include="Views\Store\Index.cshtml" />
+    <Content Include="Views\Store\Search.cshtml" />
+    <Content Include="Views\Store\_TypeMenu.cshtml" />
+    <Content Include="Views\SupManager\Create.cshtml" />
+    <Content Include="Views\SupManager\Delete.cshtml" />
+    <Content Include="Views\SupManager\Details.cshtml" />
+    <Content Include="Views\SupManager\Edit.cshtml" />
+    <Content Include="Views\SupManager\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Images\" />
