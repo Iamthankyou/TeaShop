@@ -59,8 +59,13 @@
         //List all APIs Here
 
         '/api/Teas/',
-        '/api/Sups/ ',
-
+        '/api/Sups/',
+        '/api/Carts/',
+        '/api/Details/',
+        '/api/Home/',
+        '/api/Store/',
+        '/api/Types/',
+        '/api/TypeMenu/ '
     ];
 
 
@@ -109,7 +114,13 @@
         //List all APIs Here
 
         '/api/Teas/',
-        '/api/Sups/'
+        '/api/Sups/',
+        '/api/Carts/',
+        '/api/Details/ ',
+        '/api/Home/',
+        '/api/Store/',
+        '/api/Types/',
+        '/api/TypeMenu/'
 
     ];
 

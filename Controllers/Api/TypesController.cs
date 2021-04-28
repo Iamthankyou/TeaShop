@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using TeaMVC.Models;
-using Type = TeaMVC.Models.Type;
 
 namespace TeaMVC.Controllers.Api
 {
