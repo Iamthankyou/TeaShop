@@ -1,22 +1,28 @@
 ﻿@model IdentitySample.Models.ApplicationUser
 
 @{
-    ViewBag.Title = "Thông tin người dùng";
+    ViewBag.Title = "Details";
 }
 
-<h2>Chi tiết</h2>
+<h2>Details.</h2>
 
 <div>
-    <h4>Tên tài khoản</h4>
+    <h4>User</h4>
     <hr />
-    <p> @Html.DisplayFor(model => model.UserName)</p> 
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+    </dl>
 </div>
-<br />
-<h4>Được phép</h4>
+<h4>List of roles for this user</h4>
 @if (ViewBag.RoleNames.Count == 0)
 {
     <hr />
-    <p>Không cho phép quyền quản trị</p>
+    <p>No roles found for this user.</p>
 }
 
 <table class="table">
@@ -31,8 +37,8 @@
     }
 </table>
 <p>
-    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Quay lại quản lý tài khoản", "Index")
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
 </p>
 
 

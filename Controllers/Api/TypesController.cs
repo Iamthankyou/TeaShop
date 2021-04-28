@@ -6,63 +6,60 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using TeaMVC.Models;
+using Type = TeaMVC.Models.Type;
 
 namespace TeaMVC.Controllers.Api
 {
-    public class SupsController : ApiController
+    public class TypesController : ApiController
     {
         private TeaEntities db = new TeaEntities();
 
-        // GET: api/Sups
-        public IQueryable<Sup> GetSups(String query = null)
+        // GET: api/Types
+        public IQueryable<Type> GetTypes()
         {
-            if (!String.IsNullOrWhiteSpace(query))
-            {
-                return db.Sups.Where(f => f.Name.Contains(query));
-            }
-
-            return db.Sups;
+            return db.Types;
         }
 
-        // GET: api/Sups/5
-        [ResponseType(typeof(Sup))]
-        public IHttpActionResult GetSup(int id)
+        // GET: api/Types/5
+        [ResponseType(typeof(Type))]
+        public async Task<IHttpActionResult> GetType(int id)
         {
-            Sup sup = db.Sups.Find(id);
-            if (sup == null)
+            Type type = await db.Types.FindAsync(id);
+            if (type == null)
             {
                 return NotFound();
             }
 
-            return Ok(sup);
+            return Ok(type);
         }
 
-        // PUT: api/Sups/5
+        // PUT: api/Types/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutSup(int id, Sup sup)
+        public async Task<IHttpActionResult> PutType(int id, Type type)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != sup.SupId)
+            if (id != type.TypeId)
             {
                 return BadRequest();
             }
 
-            db.Entry(sup).State = EntityState.Modified;
+            db.Entry(type).State = EntityState.Modified;
 
             try
             {
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SupExists(id))
+                if (!TypeExists(id))
                 {
                     return NotFound();
                 }
@@ -75,35 +72,35 @@ namespace TeaMVC.Controllers.Api
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Sups
-        [ResponseType(typeof(Sup))]
-        public IHttpActionResult PostSup(Sup sup)
+        // POST: api/Types
+        [ResponseType(typeof(Type))]
+        public async Task<IHttpActionResult> PostType(Type type)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Sups.Add(sup);
-            db.SaveChanges();
+            db.Types.Add(type);
+            await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = sup.SupId }, sup);
+            return CreatedAtRoute("DefaultApi", new { id = type.TypeId }, type);
         }
 
-        // DELETE: api/Sups/5
-        [ResponseType(typeof(Sup))]
-        public IHttpActionResult DeleteSup(int id)
+        // DELETE: api/Types/5
+        [ResponseType(typeof(Type))]
+        public async Task<IHttpActionResult> DeleteType(int id)
         {
-            Sup sup = db.Sups.Find(id);
-            if (sup == null)
+            Type type = await db.Types.FindAsync(id);
+            if (type == null)
             {
                 return NotFound();
             }
 
-            db.Sups.Remove(sup);
-            db.SaveChanges();
+            db.Types.Remove(type);
+            await db.SaveChangesAsync();
 
-            return Ok(sup);
+            return Ok(type);
         }
 
         protected override void Dispose(bool disposing)
@@ -115,9 +112,9 @@ namespace TeaMVC.Controllers.Api
             base.Dispose(disposing);
         }
 
-        private bool SupExists(int id)
+        private bool TypeExists(int id)
         {
-            return db.Sups.Count(e => e.SupId == id) > 0;
+            return db.Types.Count(e => e.TypeId == id) > 0;
         }
     }
 }

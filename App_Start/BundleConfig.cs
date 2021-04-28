@@ -20,26 +20,11 @@ namespace IdentitySample
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
-                      "~/Scripts/bootbox.js",
                       "~/Scripts/respond.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/common").Include(
-                      "~/Scripts/common.js",
-                      "~/Scripts/DataTables/jquery.datatables.js",
-                      "~/Scripts/DataTables/datatables.bootstrap.js",
-                      "~/Scripts/toastr.js",
-                      "~/Scripts/qunit.js",
-                      "~/Scripts/typeahead.bundle.js"
-                      ));
-
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",  //bootstrap.css
-                      "~/Content/DataTables/css/datatables.bootstrap.css",  //bootstrap.css
-                      "~/Content/site.css",
-                      "~/Content/toastr.css",
-                      "~/Content/qunit.css",
-                      "~/Content/typeahead.css"
-                      ));
+                      "~/Content/bootstrap.css",
+                      "~/Content/site.css"));
         }
     }
 }

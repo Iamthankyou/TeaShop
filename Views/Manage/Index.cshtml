@@ -1,46 +1,46 @@
 ﻿@model IdentitySample.Models.IndexViewModel
 @{
-    ViewBag.Title = "Quản lý tài khoản";
+    ViewBag.Title = "Manage your account";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2>@ViewBag.Title.</h2>
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div class="row">
     <div class="col-md-8">
         <p>
             @if (Model.HasPassword)
             {
-                @Html.ActionLink("Thay đổi mật khẩu", "ChangePassword")
+                @Html.ActionLink("Change your password", "ChangePassword")
             }
             else
             {
-                @Html.ActionLink("Mật khẩu mới", "SetPassword")
+                @Html.ActionLink("Pick a password", "SetPassword")
             }
         </p>
         <p>
-            Số điện thoại liên hệ: @(Model.PhoneNumber ?? "Không") [
+            Phone Number: @(Model.PhoneNumber ?? "None") [
             @if (Model.PhoneNumber != null)
             {
-                @Html.ActionLink("Thay đổi số điện thoại", "AddPhoneNumber")
+                @Html.ActionLink("Change", "AddPhoneNumber")
                 @: &nbsp;|&nbsp;
-                @Html.ActionLink("Xóa số điện thoại", "RemovePhoneNumber")
+                @Html.ActionLink("Remove", "RemovePhoneNumber")
             }
             else
             {
-                @Html.ActionLink("Thêm số điện thoại mới", "AddPhoneNumber")
+                @Html.ActionLink("Add", "AddPhoneNumber")
             }
             ]
         </p>
         <p>
-            Đăng nhập bên thứ 3 (tất nhiên không có) @Model.Logins.Count
-            @Html.ActionLink("[Quản lý]", "ManageLogins")
+            External Logins: @Model.Logins.Count
+            @Html.ActionLink("[Manage]", "ManageLogins")
         </p>
         @if (Model.TwoFactor)
         {
             <form method="post" action="/Manage/DisableTFA">
                 <p>
-                    Xác minh hai bước được bật
-                    <input type="submit" value="Hủy kích hoạt" class="btn btn-default"/>
+                    Two factor is currently enabled:
+                    <input type="submit" value="Disable" class="btn btn-default"/>
                 </p>
             </form>
         }
@@ -48,8 +48,8 @@
         {
             <form method="post" action="/Manage/EnableTFA">
                 <p>
-                    Xác minh 2 bước không được bật
-                    <input type="submit" value="Bật" class="btn btn-default"/>
+                    Two factor is currently disabled:
+                    <input type="submit" value="Enable" class="btn btn-default"/>
                 </p>
             </form>
         }
@@ -57,8 +57,8 @@
         {
             <form method="post" action="/Manage/ForgetBrowser">
                 <p>
-                    Trình duyệt đã nhớ xác minh 
-                    <input type="submit" value="Hủy nhớ" class="btn btn-default" />
+                    Browser is curently remembered for two factor:
+                    <input type="submit" value="Forget Browser" class="btn btn-default" />
                 </p>
             </form>
         }
@@ -66,8 +66,8 @@
         {
             <form method="post" action="/Manage/RememberBrowser">
                 <p>
-                    Trình duyệt không nhớ xác minh
-                    <input type="submit" value="Hãy nhớ" class="btn btn-default"/>
+                    Browser is curently not remembered for two factor:
+                    <input type="submit" value="Remember Browser" class="btn btn-default"/>
                 </p>
             </form>
         }

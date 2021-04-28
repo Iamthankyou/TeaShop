@@ -9,16 +9,12 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using TeaMVC.Models;
-using System.Web.Security;
 
 namespace IdentitySample.Controllers
 {
-     [Authorize]
+    [Authorize]
     public class AccountController : Controller
     {
-        private ApplicationUserManager _userManager;
-
         public AccountController()
         {
         }
@@ -29,6 +25,7 @@ namespace IdentitySample.Controllers
             SignInManager = signInManager;
         }
 
+        private ApplicationUserManager _userManager;
         public ApplicationUserManager UserManager
         {
             get
@@ -41,9 +38,6 @@ namespace IdentitySample.Controllers
             }
         }
 
-       
-
-        //
         //
         // GET: /Account/Login
         [AllowAnonymous]
@@ -64,17 +58,6 @@ namespace IdentitySample.Controllers
             private set { _signInManager = value; }
         }
 
-
-        // Sau khi xác nhận đặt  hàng
-        private void MigrateShoppingCart(string UserEmail)
-        {
-            // Liên kết giỏ hàng với người dùng đưng nhập
-            var cart = ShoppingCart.GetCart(this.HttpContext);
-
-            cart.MigrateCart(UserEmail);
-            Session[ShoppingCart.CartSessionKey] = UserEmail;
-        }
-        //
         //
         // POST: /Account/Login
         [HttpPost]
@@ -84,20 +67,12 @@ namespace IdentitySample.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model );
-            }
-
-            var user = await UserManager.FindByEmailAsync(model.Email);
-
-            if (user != null && !user.EmailConfirmed && (await UserManager.CheckPasswordAsync(user, model.Password)))
-            {
-                ModelState.AddModelError(string.Empty, "Email này chưa được xác nhận");
                 return View(model);
             }
 
-
+            // This doen't count login failures towards lockout only two factor authentication
+            // To enable password failures to trigger lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
-           
             switch (result)
             {
                 case SignInStatus.Success:
@@ -105,10 +80,10 @@ namespace IdentitySample.Controllers
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Đăng nhập thất bại, hãy thử lại。");
+                    ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
             }
         }
@@ -174,19 +149,14 @@ namespace IdentitySample.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { 
-                    UserName = model.Email,
-                    Email = model.Email,
-                    fullName = model.fullName
-                };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Xác nhận tài khoản", "Cảm ơn bạn đã đăng ký tài khoản của Trà Sữa, nhấp vào đây để xác thực <a href=\"" + callbackUrl + "\">link</a>");
-                    ViewBag.Link = callbackUrl;   
-                    MigrateShoppingCart(model.Email);
+                    await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
+                    ViewBag.Link = callbackUrl;
                     return View("DisplayEmail");
                 }
                 AddErrors(result);
@@ -235,7 +205,7 @@ namespace IdentitySample.Controllers
 
                 var code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                await UserManager.SendEmailAsync(user.Id, "Mật khẩu cài lại", "Nhấp vào đây để cài lại mật khẩu: <a href=\"" + callbackUrl + "\">link</a>");
+                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">link</a>");
                 ViewBag.Link = callbackUrl;
                 return View("ForgotPasswordConfirmation");
             }
@@ -274,7 +244,7 @@ namespace IdentitySample.Controllers
             var user = await UserManager.FindByNameAsync(model.Email);
             if (user == null)
             {
-                // Không hiển thị người dùng không tổn tại
+                // Don't reveal that the user does not exist
                 return RedirectToAction("ResetPasswordConfirmation", "Account");
             }
             var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
@@ -301,7 +271,7 @@ namespace IdentitySample.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
-            // Đăng nhập ngoài
+            // Request a redirect to the external login provider
             return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
         }
 
@@ -320,7 +290,6 @@ namespace IdentitySample.Controllers
             return View(new SendCodeViewModel { Providers = factorOptions, ReturnUrl = returnUrl });
         }
 
-        //
         //
         // POST: /Account/SendCode
         [HttpPost]
@@ -344,17 +313,15 @@ namespace IdentitySample.Controllers
         //
         // GET: /Account/ExternalLoginCallback
         [AllowAnonymous]
-        public async Task<ActionResult> ExternalLoginCallback(string returnUrl) 
+        public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
-            
             if (loginInfo == null)
             {
-                //return RedirectToAction("Login");
-                return View("ExternalLoginFailure");
+                return RedirectToAction("Login");
             }
 
-            
+            // Sign in the user with this external login provider if the user already has a login
             var result = await SignInManager.ExternalSignInAsync(loginInfo, isPersistent: false);
             switch (result)
             {
@@ -363,10 +330,10 @@ namespace IdentitySample.Controllers
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
-                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = false });
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl });
                 case SignInStatus.Failure:
                 default:
-                    // Nhắc tạo tài khoản
+                    // If the user does not have an account, then prompt the user to create an account
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
                     return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
@@ -380,7 +347,6 @@ namespace IdentitySample.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl)
         {
-
             if (User.Identity.IsAuthenticated)
             {
                 return RedirectToAction("Index", "Manage");
@@ -388,15 +354,13 @@ namespace IdentitySample.Controllers
 
             if (ModelState.IsValid)
             {
-                // Nhận thông tin từ đăng nhập ngoài
+                // Get the information about the user from the external login provider
                 var info = await AuthenticationManager.GetExternalLoginInfoAsync();
-
                 if (info == null)
                 {
                     return View("ExternalLoginFailure");
                 }
-            
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, fullName = "NoName" };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
@@ -432,8 +396,8 @@ namespace IdentitySample.Controllers
             return View();
         }
 
-        #region Helper
-        // thêm login bên ngoài
+        #region Helpers
+        // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
         private IAuthenticationManager AuthenticationManager

@@ -6,63 +6,59 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using TeaMVC.Models;
 
 namespace TeaMVC.Controllers.Api
 {
-    public class SupsController : ApiController
+    public class OrdersController : ApiController
     {
         private TeaEntities db = new TeaEntities();
 
-        // GET: api/Sups
-        public IQueryable<Sup> GetSups(String query = null)
+        // GET: api/Orders
+        public IQueryable<Order> GetOrders()
         {
-            if (!String.IsNullOrWhiteSpace(query))
-            {
-                return db.Sups.Where(f => f.Name.Contains(query));
-            }
-
-            return db.Sups;
+            return db.Orders;
         }
 
-        // GET: api/Sups/5
-        [ResponseType(typeof(Sup))]
-        public IHttpActionResult GetSup(int id)
+        // GET: api/Orders/5
+        [ResponseType(typeof(Order))]
+        public async Task<IHttpActionResult> GetOrder(int id)
         {
-            Sup sup = db.Sups.Find(id);
-            if (sup == null)
+            Order order = await db.Orders.FindAsync(id);
+            if (order == null)
             {
                 return NotFound();
             }
 
-            return Ok(sup);
+            return Ok(order);
         }
 
-        // PUT: api/Sups/5
+        // PUT: api/Orders/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutSup(int id, Sup sup)
+        public async Task<IHttpActionResult> PutOrder(int id, Order order)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != sup.SupId)
+            if (id != order.OrderId)
             {
                 return BadRequest();
             }
 
-            db.Entry(sup).State = EntityState.Modified;
+            db.Entry(order).State = EntityState.Modified;
 
             try
             {
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SupExists(id))
+                if (!OrderExists(id))
                 {
                     return NotFound();
                 }
@@ -75,35 +71,35 @@ namespace TeaMVC.Controllers.Api
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Sups
-        [ResponseType(typeof(Sup))]
-        public IHttpActionResult PostSup(Sup sup)
+        // POST: api/Orders
+        [ResponseType(typeof(Order))]
+        public async Task<IHttpActionResult> PostOrder(Order order)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Sups.Add(sup);
-            db.SaveChanges();
+            db.Orders.Add(order);
+            await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = sup.SupId }, sup);
+            return CreatedAtRoute("DefaultApi", new { id = order.OrderId }, order);
         }
 
-        // DELETE: api/Sups/5
-        [ResponseType(typeof(Sup))]
-        public IHttpActionResult DeleteSup(int id)
+        // DELETE: api/Orders/5
+        [ResponseType(typeof(Order))]
+        public async Task<IHttpActionResult> DeleteOrder(int id)
         {
-            Sup sup = db.Sups.Find(id);
-            if (sup == null)
+            Order order = await db.Orders.FindAsync(id);
+            if (order == null)
             {
                 return NotFound();
             }
 
-            db.Sups.Remove(sup);
-            db.SaveChanges();
+            db.Orders.Remove(order);
+            await db.SaveChangesAsync();
 
-            return Ok(sup);
+            return Ok(order);
         }
 
         protected override void Dispose(bool disposing)
@@ -115,9 +111,9 @@ namespace TeaMVC.Controllers.Api
             base.Dispose(disposing);
         }
 
-        private bool SupExists(int id)
+        private bool OrderExists(int id)
         {
-            return db.Sups.Count(e => e.SupId == id) > 0;
+            return db.Orders.Count(e => e.OrderId == id) > 0;
         }
     }
 }

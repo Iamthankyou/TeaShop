@@ -1,19 +1,18 @@
 ﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
 
 @{
-    ViewBag.Title = "Quản lý quyền";
+    ViewBag.Title = "Index";
 }
 
-<h2>Quản lý quyền</h2>
+<h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Tạo", "Create")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @*@Html.DisplayNameFor(model => model.Name)*@
-            Tên quyền
+            @Html.DisplayNameFor(model => model.Name)
         </th>
         <th>
 
@@ -27,9 +26,9 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>
     }

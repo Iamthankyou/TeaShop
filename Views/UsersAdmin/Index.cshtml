@@ -1,18 +1,18 @@
 ﻿@model IEnumerable<IdentitySample.Models.ApplicationUser>
 
 @{
-    ViewBag.Title = "Quản lý tài khoản";
+    ViewBag.Title = "Index";
 }
 
-<h2>Quản lý tài khoản</h2>
+<h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Thêm người dùng", "Create")
+    @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-           Tên tài khoản
+            @Html.DisplayNameFor(model => model.UserName)
         </th>
         <th>
 
@@ -26,9 +26,9 @@
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
             <td>
-                @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Chi tiết", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Xóa", "Delete", new { id = item.Id })
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>
     }
