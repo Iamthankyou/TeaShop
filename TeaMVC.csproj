@@ -218,9 +218,12 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\DetailController.cs" />
+    <Compile Include="Controllers\Api\HomeController.cs" />
     <Compile Include="Controllers\Api\StoreController.cs" />
     <Compile Include="Controllers\Api\SupsController.cs" />
     <Compile Include="Controllers\Api\TeasController.cs" />
+    <Compile Include="Controllers\Api\TypeMenuController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -266,6 +269,10 @@
     <Compile Include="ViewModels\ShoppingCartViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="API Tests\qunit.css" />
+    <Content Include="API Tests\qunit.js" />
+    <Content Include="API Tests\TeaAPI.html" />
+    <Content Include="API Tests\TeaAPI.js" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.min.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap4.css" />
@@ -438,6 +445,7 @@
     <Content Include="Content\images\Slider\slide3.jpg" />
     <Content Include="Content\images\Slider\slide2.jpg" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\qunit.css" />
     <Content Include="Content\typeahead.css" />
     <Content Include="favicon.ico" />
     <Content Include="Content\Custom.css" />
@@ -454,6 +462,9 @@
     <Content Include="Content\bootstrap_Space.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bloodhound.js" />
     <Content Include="Scripts\bloodhound.min.js" />
     <Content Include="Scripts\bootbox.js" />
@@ -471,6 +482,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="Scripts\angular.min.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\common.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
@@ -557,6 +569,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\qunit.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\typeahead.bundle.js" />

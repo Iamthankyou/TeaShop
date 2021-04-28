@@ -7,31 +7,31 @@ using System.Web.Http;
 
 namespace TeaMVC.Controllers.Api
 {
-    public class StoreController : ApiController
+    public class DetailController : ApiController
     {
-        // GET: api/Store
+        // GET: api/Detail
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
         }
 
-        // GET: api/Store/5
+        // GET: api/Detail/5
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST: api/Store
+        // POST: api/Detail
         public void Post([FromBody]string value)
         {
         }
 
-        // PUT: api/Store/5
+        // PUT: api/Detail/5
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE: api/Store/5
+        // DELETE: api/Detail/5
         public void Delete(int id)
         {
         }

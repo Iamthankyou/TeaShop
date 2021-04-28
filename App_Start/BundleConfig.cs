@@ -28,6 +28,7 @@ namespace IdentitySample
                       "~/Scripts/DataTables/jquery.datatables.js",
                       "~/Scripts/DataTables/datatables.bootstrap.js",
                       "~/Scripts/toastr.js",
+                      "~/Scripts/qunit.js",
                       "~/Scripts/typeahead.bundle.js"
                       ));
 
@@ -36,6 +37,7 @@ namespace IdentitySample
                       "~/Content/DataTables/css/datatables.bootstrap.css",  //bootstrap.css
                       "~/Content/site.css",
                       "~/Content/toastr.css",
+                      "~/Content/qunit.css",
                       "~/Content/typeahead.css"
                       ));
         }

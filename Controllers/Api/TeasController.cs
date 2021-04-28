@@ -19,6 +19,7 @@ namespace TeaMVC.Controllers.Api
         private TeaEntities db = new TeaEntities();
 
         // GET: api/Teass
+        [Authorize]
         public IQueryable<Tea> GetTeas(string query=null)
         {
             if (!String.IsNullOrWhiteSpace(query))
@@ -29,7 +30,7 @@ namespace TeaMVC.Controllers.Api
             return db.Teas;
         }
 
-            public async Task<HttpResponseMessage> PostFormData()
+        public async Task<HttpResponseMessage> PostFormData()
             {
                 // Check if the request contains multipart/form-data.
                 if (!Request.Content.IsMimeMultipartContent())

@@ -4,34 +4,39 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using TeaMVC.Models;
 
 namespace TeaMVC.Controllers.Api
 {
-    public class StoreController : ApiController
+    public class HomeController : ApiController
     {
-        // GET: api/Store
-        public IEnumerable<string> Get()
+        TeaEntities storeDB = new TeaEntities();
+
+        // GET: api/Home
+        public IEnumerable<Tea> Get()
         {
-            return new string[] { "value1", "value2" };
+            return storeDB.Teas
+                 .OrderByDescending(a => a.OrderDetails.Sum(o => o.Quantity)).Take(5);
+
         }
 
-        // GET: api/Store/5
+        // GET: api/Home/5
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST: api/Store
+        // POST: api/Home
         public void Post([FromBody]string value)
         {
         }
 
-        // PUT: api/Store/5
+        // PUT: api/Home/5
         public void Put(int id, [FromBody]string value)
         {
         }
 
-        // DELETE: api/Store/5
+        // DELETE: api/Home/5
         public void Delete(int id)
         {
         }
