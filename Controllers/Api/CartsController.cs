@@ -6,63 +6,59 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
 using TeaMVC.Models;
 
 namespace TeaMVC.Controllers.Api
 {
-    public class SupsController : ApiController
+    public class CartsController : ApiController
     {
         private TeaEntities db = new TeaEntities();
 
-        // GET: api/Sups
-        public IQueryable<Sup> GetSups(String query = null)
+        // GET: api/Carts
+        public IQueryable<Cart> GetCarts()
         {
-            if (!String.IsNullOrWhiteSpace(query))
-            {
-                return db.Sups.Where(f => f.Name.Contains(query));
-            }
-
-            return db.Sups;
+            return db.Carts;
         }
 
-        // GET: api/Sups/5
-        [ResponseType(typeof(Sup))]
-        public IHttpActionResult GetSup(int id)
+        // GET: api/Carts/5
+        [ResponseType(typeof(Cart))]
+        public async Task<IHttpActionResult> GetCart(int id)
         {
-            Sup sup = db.Sups.Find(id);
-            if (sup == null)
+            Cart cart = await db.Carts.FindAsync(id);
+            if (cart == null)
             {
                 return NotFound();
             }
 
-            return Ok(sup);
+            return Ok(cart);
         }
 
-        // PUT: api/Sups/5
+        // PUT: api/Carts/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutSup(int id, Sup sup)
+        public async Task<IHttpActionResult> PutCart(int id, Cart cart)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != sup.SupId)
+            if (id != cart.RecordId)
             {
                 return BadRequest();
             }
 
-            db.Entry(sup).State = EntityState.Modified;
+            db.Entry(cart).State = EntityState.Modified;
 
             try
             {
-                db.SaveChanges();
+                await db.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!SupExists(id))
+                if (!CartExists(id))
                 {
                     return NotFound();
                 }
@@ -75,35 +71,35 @@ namespace TeaMVC.Controllers.Api
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Sups
-        [ResponseType(typeof(Sup))]
-        public IHttpActionResult PostSup(Sup sup)
+        // POST: api/Carts
+        [ResponseType(typeof(Cart))]
+        public async Task<IHttpActionResult> PostCart(Cart cart)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Sups.Add(sup);
-            db.SaveChanges();
+            db.Carts.Add(cart);
+            await db.SaveChangesAsync();
 
-            return CreatedAtRoute("DefaultApi", new { id = sup.SupId }, sup);
+            return CreatedAtRoute("DefaultApi", new { id = cart.RecordId }, cart);
         }
 
-        // DELETE: api/Sups/5
-        [ResponseType(typeof(Sup))]
-        public IHttpActionResult DeleteSup(int id)
+        // DELETE: api/Carts/5
+        [ResponseType(typeof(Cart))]
+        public async Task<IHttpActionResult> DeleteCart(int id)
         {
-            Sup sup = db.Sups.Find(id);
-            if (sup == null)
+            Cart cart = await db.Carts.FindAsync(id);
+            if (cart == null)
             {
                 return NotFound();
             }
 
-            db.Sups.Remove(sup);
-            db.SaveChanges();
+            db.Carts.Remove(cart);
+            await db.SaveChangesAsync();
 
-            return Ok(sup);
+            return Ok(cart);
         }
 
         protected override void Dispose(bool disposing)
@@ -115,9 +111,9 @@ namespace TeaMVC.Controllers.Api
             base.Dispose(disposing);
         }
 
-        private bool SupExists(int id)
+        private bool CartExists(int id)
         {
-            return db.Sups.Count(e => e.SupId == id) > 0;
+            return db.Carts.Count(e => e.RecordId == id) > 0;
         }
     }
 }

@@ -218,16 +218,26 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\Api\StoreController.cs" />
+    <Compile Include="Controllers\AnaController.cs" />
+    <Compile Include="Controllers\Api\AnaController.cs" />
+    <Compile Include="Controllers\Api\CartsController.cs" />
+    <Compile Include="Controllers\Api\HomeController.cs" />
+    <Compile Include="Controllers\Api\OrderDetailsController.cs" />
+    <Compile Include="Controllers\Api\OrdersController.cs" />
     <Compile Include="Controllers\Api\SupsController.cs" />
     <Compile Include="Controllers\Api\TeasController.cs" />
+    <Compile Include="Controllers\Api\TypeMenuController.cs" />
+    <Compile Include="Controllers\Api\TypesController.cs" />
     <Compile Include="Controllers\CheckoutController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\RolesAdminController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\StoreController.cs" />
     <Compile Include="Controllers\StoreManagerController.cs" />
+    <Compile Include="Controllers\SupManagerController.cs" />
+    <Compile Include="Controllers\TypeController.cs" />
     <Compile Include="Controllers\UserAdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -266,6 +276,10 @@
     <Compile Include="ViewModels\ShoppingCartViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="API Tests\qunit.css" />
+    <Content Include="API Tests\qunit.js" />
+    <Content Include="API Tests\TeaAPI.html" />
+    <Content Include="API Tests\TeaAPI.js" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.min.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap4.css" />
@@ -438,6 +452,7 @@
     <Content Include="Content\images\Slider\slide3.jpg" />
     <Content Include="Content\images\Slider\slide2.jpg" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\qunit.css" />
     <Content Include="Content\typeahead.css" />
     <Content Include="favicon.ico" />
     <Content Include="Content\Custom.css" />
@@ -454,6 +469,9 @@
     <Content Include="Content\bootstrap_Space.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bloodhound.js" />
     <Content Include="Scripts\bloodhound.min.js" />
     <Content Include="Scripts\bootbox.js" />
@@ -471,6 +489,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Content Include="Scripts\angular.min.js.map" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\common.js" />
     <Content Include="Scripts\DataTables\autoFill.bootstrap.js" />
@@ -557,6 +576,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\qunit.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\typeahead.bundle.js" />
@@ -574,14 +594,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\StoreManager\Create.cshtml" />
-    <Content Include="Views\StoreManager\Delete.cshtml" />
-    <Content Include="Views\StoreManager\Details.cshtml" />
-    <Content Include="Views\StoreManager\Edit.cshtml" />
-    <Content Include="Views\StoreManager\Index.cshtml" />
-    <Content Include="Views\Store\Browse.cshtml" />
-    <Content Include="Views\Store\Details.cshtml" />
-    <Content Include="Views\Store\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\UsersAdmin\Index.cshtml" />
@@ -627,12 +639,32 @@
     <Content Include="Views\Checkout\AddressAndPayment.cshtml" />
     <Content Include="Views\Checkout\Complete.cshtml" />
     <Content Include="Views\ShoppingCart\_CartSummary.cshtml" />
-    <Content Include="Views\Store\_TypeMenu.cshtml" />
     <Content Include="Views\Shared\_ChangeTheme.cshtml" />
     <Content Include="Views\Checkout\View.cshtml" />
     <Content Include="Views\Checkout\OrderDetails.cshtml" />
-    <Content Include="Views\Store\Search.cshtml" />
     <Content Include="Views\Shared\_Search.cshtml" />
+    <Content Include="Views\StoreManager\Create.cshtml" />
+    <Content Include="Views\StoreManager\Delete.cshtml" />
+    <Content Include="Views\StoreManager\Details.cshtml" />
+    <Content Include="Views\StoreManager\Edit.cshtml" />
+    <Content Include="Views\StoreManager\Index.cshtml" />
+    <Content Include="Views\Store\Browse.cshtml" />
+    <Content Include="Views\Store\Details.cshtml" />
+    <Content Include="Views\Store\Index.cshtml" />
+    <Content Include="Views\Store\Search.cshtml" />
+    <Content Include="Views\Store\_TypeMenu.cshtml" />
+    <Content Include="Views\SupManager\Create.cshtml" />
+    <Content Include="Views\SupManager\Delete.cshtml" />
+    <Content Include="Views\SupManager\Details.cshtml" />
+    <Content Include="Views\SupManager\Edit.cshtml" />
+    <Content Include="Views\SupManager\Index.cshtml" />
+    <Content Include="Views\Ana\Index.cshtml" />
+    <Content Include="Views\Orders\Create.cshtml" />
+    <Content Include="Views\Orders\Delete.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Type\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\Images\" />

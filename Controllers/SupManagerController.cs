@@ -17,7 +17,7 @@ using System.Configuration;
 namespace TeaMVC.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public class StoreManagerController : Controller
+    public class SupManagerController : Controller
     {
         private TeaEntities db = new TeaEntities();
 
@@ -120,7 +120,7 @@ namespace TeaMVC.Controllers
         // GET: StoreManager
         public async Task<ActionResult> Index()
         {
-            var Teas = db.Teas.Include(a => a.Sup).Include(a => a.Type);
+            var Teas = db.Sups;
             return View(await Teas.ToListAsync());
         }
 
@@ -131,7 +131,7 @@ namespace TeaMVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Tea Tea = await db.Teas.FindAsync(id);
+            Sup Tea = await db.Sups.FindAsync(id);
             if (Tea == null)
             {
                 return HttpNotFound();
@@ -151,28 +151,19 @@ namespace TeaMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "TeaId,TypeId,SupId,Title,Price,TeaArtUrl")] Tea Tea, HttpPostedFileBase file)
+        public async Task<ActionResult> Create([Bind(Include = "Name,SupId")] Sup Sup, HttpPostedFileBase file)
         {
-            if (ModelState.IsValid&& file!=null)
-            {
-                //Đường dẫn hình ảnh, thư mục lưu trữ:
-                
-                    var fileName = Path.GetFileName(file.FileName);
-                    var path = Path.Combine(Server.MapPath("~/Content/images/Upload"), fileName);
-                    file.SaveAs(path);
-                    Tea.TeaArtUrl = "/Content/Images/Upload/" + fileName;
+        db.Sups.Add(Sup);
+        await db.SaveChangesAsync();
+        TempData["Success"] = true;
+        return RedirectToAction("Details", new { id = Sup.SupId });   
+
+            
 
 
-                    db.Teas.Add(Tea);
-                    await db.SaveChangesAsync();
-                    TempData["Success"] = true;
-                    return RedirectToAction("Details", new { id = Tea.TeaId });   
-            }
-
-            ViewBag.SupId = new SelectList(db.Sups, "SupId", "Name", Tea.SupId);
-            ViewBag.TypeId = new SelectList(db.Types, "TypeId", "Name", Tea.TypeId);
+            ViewBag.SupId = new SelectList(db.Sups, "SupId", "Name", Sup.SupId);
             ViewBag.uploadInfo = "Đường dẫn hình ảnh: ！";
-            return View(Tea);
+            return View(Sup);
         }
 
         // GET: StoreManager/Edit/5

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TeaMVC.Models.Tea>
+﻿@model IEnumerable<TeaMVC.Models.Type>
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
@@ -7,7 +7,6 @@
 @Styles.Render("~/Content/css")
 
 <script type="text/javascript">
-
 
     $(document).ready(function () {
 
@@ -19,7 +18,7 @@
             bootbox.confirm("Xóa sản phẩm này ?", function (res) {
                 if (res) {
                     $.ajax({
-                        url: "/api/Teas/" + button.attr("data-tea-id"),
+                        url: "/api/Types/" + button.attr("data-tea-id"),
                         method: "DELETE",
                         success: function () {
                             button.parents("tr").remove();
@@ -71,35 +70,20 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Quản lý trà sữa</h2>
-
-<p>
-    @Html.ActionLink("Thêm loại trà mới", "Create")
-</p>
-
-<p>
-    @Html.ActionLink("Thêm nhà cung cấp mới", "Index", "SupManager")
-</p>
-
-<p>
-    @Html.ActionLink("Thêm loại trà mới", "Index", "Type")
-</p>
-
+<h2>Thống kê bán hàng</h2>
 
 <table id="teas" class="table">
     <thead>
         <tr>
             <th>
-                Loại trà
+                Tên khách hàng
             </th>
             <th>
-                Đơn vị cung cấp
+                Địa chỉ
             </th>
+
             <th>
-                Tên trà
-            </th>
-            <th>
-                Đơn giá
+                Tổng tiền
             </th>
             @*<th>
                     @Html.DisplayNameFor(model => model.TeaArtUrl)
@@ -114,27 +98,27 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Type.Name)
+                    @Html.DisplayFor(modelItem => item.TypeId)
+                    @Html.DisplayFor(modelItem => item.Name)
                 </td>
+
                 <td>
-                    @Truncate(item.Sup.Name, 25)
+                    @Html.DisplayFor(modelItem => item.TypeId)
                 </td>
+
                 <td>
-                    @Truncate(item.Title, 25)
+                    @Html.DisplayFor(modelItem => item.Name)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
+
+
                 @*<td>
                         @Html.DisplayFor(modelItem => item.TeaArtUrl)
                     </td>*@
                 <td>
-                    @Html.ActionLink("Chỉnh sửa", "Edit", new { id = item.TeaId }) |
-                    @Html.ActionLink("Chi tiết", "Details", new { id = item.TeaId }) |
+                    @Html.ActionLink("Chi tiết", "Details", new { id = item.TypeId })
                     @*
                         @Html.ActionLink("Xóa ", "Delete", new { id=item.TeaId })
                     *@
-                    <button data-tea-id="@item.TeaId" class="btn-link js-delete">Xóa</button>
                 </td>
             </tr>
         }

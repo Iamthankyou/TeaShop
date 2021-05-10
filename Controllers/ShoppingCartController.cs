@@ -75,6 +75,7 @@ namespace TeaMVC.Controllers
             //
             // GET: /ShoppingCart/CartSummary
             [ChildActionOnly]
+            [AllowAnonymous]
             public ActionResult CartSummary()
             {
                 var cart = ShoppingCart.GetCart(this.HttpContext);
